@@ -1,0 +1,29 @@
+//
+//  TemplateField.swift
+//  MegaList
+//
+//  Created by Petra Koszegi on 12/12/2025.
+//
+
+import Foundation
+import SwiftData
+
+enum FieldType: String, Codable {
+    case boolean
+    case date
+    case text
+    case number
+}
+
+@Model
+class TemplateField {
+    @Attribute(.unique) var id: UUID
+    var name: String
+    var type: FieldType
+    
+    init(name: String, type: FieldType) {
+        self.id = UUID()
+        self.name = name
+        self.type = type
+    }
+}

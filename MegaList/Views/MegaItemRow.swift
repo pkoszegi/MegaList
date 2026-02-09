@@ -30,12 +30,6 @@ struct MegaItemRow: View {
             
             Spacer()
             
-//            if let quantity = item.quantity, quantity > 0 {
-//                Text("\(quantity) \(item.unit ?? "")")
-//                    .font(.subheadline)
-//                    .foregroundStyle(.secondary)
-//            }
-    
             Button {
                 onCategoryTap()
             } label : {

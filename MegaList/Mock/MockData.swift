@@ -29,12 +29,20 @@ struct MockData {
         let container = makeContainer()
         let context = container.mainContext
         
+        sampleCategories.forEach { context.insert($0) }
+
         let groceries = MegaList(title: "Groceries")
-        groceries.items.append(contentsOf: MegaItem.samples)
         context.insert(groceries)
-        context.insert(MegaList(title: "Chores"))
+        
+        MegaItem.samples.forEach { sample in
+            let item = MegaItem(name: sample.name, category: sample.category)
+            groceries.items.append(item)
+            context.insert(item)
+        }
+        
+        context.insert(MegaList(title: "Chores", template: .chores))
         context.insert(MegaList(title: "Party Supplies"))
-        context.insert(MegaList(title: "Packing List"))
+        context.insert(MegaList(title: "Packing List", template: .packingList))
         
         return container
     }

@@ -13,7 +13,6 @@ class Category {
     @Attribute(.unique) var id = UUID()
     var name: String
     var emoji: String
-    var createdAt = Date()
     
     init(name: String, emoji: String) {
         self.name = name

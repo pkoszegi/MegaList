@@ -25,20 +25,24 @@ struct AddCategorySheet: View {
                         .autocorrectionDisabled()
                 }
 
-                Section {
-                    Button("Create") {
-                        guard !name.trimmingCharacters(in: .whitespaces).isEmpty,
-                              !emoji.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+                Button("Create") {
+                    guard !name.trimmingCharacters(in: .whitespaces).isEmpty,
+                          !emoji.trimmingCharacters(in: .whitespaces).isEmpty else { return }
 
-                        onAdd(
-                            Category(name: name.trimmingCharacters(in: .whitespaces),
-                                     emoji: emoji.trimmingCharacters(in: .whitespaces))
-                        )
-                    }
-                    .buttonStyle(.borderedProminent)
+                    onAdd(
+                        Category(name: name.trimmingCharacters(in: .whitespaces),
+                                 emoji: emoji.trimmingCharacters(in: .whitespaces))
+                    )
                 }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.accentColor)
+                .foregroundStyle(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                
             }
             .navigationTitle("New Category")
+            .navigationBarTitleDisplayMode(.inline)
             .presentationDetents([.medium])
         }
     }

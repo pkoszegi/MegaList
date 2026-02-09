@@ -11,12 +11,13 @@ import SwiftData
 class MegaList {
     @Attribute(.unique) var id: UUID
     var title: String
-//    var template: ListTemplate
+    var template: ListTemplate?
     @Relationship(deleteRule: .cascade) var items: [MegaItem]
     
-    init(title: String) {
+    init(title: String, template: ListTemplate? = nil) {
         self.id = UUID()
         self.title = title
+        self.template = template
         self.items = []
     }
     
@@ -26,4 +27,8 @@ class MegaList {
         self.items = items
     }
     
+    var usedCategories: [Category] {
+        Array(Set(items.compactMap { $0.category }))
+    }
+
 }

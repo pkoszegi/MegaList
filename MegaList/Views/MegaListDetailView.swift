@@ -21,7 +21,7 @@ struct MegaListDetailView: View {
     @State private var selectedItemForCategory: MegaItem?
     @State private var showingCategoryPicker = false
     
-    @Query(sort: \Category.createdAt) var categories: [Category]
+    @Query var categories: [Category]
     
     init(list: MegaList) {
         self.list = list

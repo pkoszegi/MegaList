@@ -23,20 +23,6 @@ struct EditItemSheet: View {
                         .focused($nameIsFocused)
                 }
 
-//                Section("Quantity & Unit") {
-//                    Stepper(value: Binding(
-//                        get: { item.quantity ?? 0 },
-//                        set: { item.quantity = $0 }
-//                    ), in: 0...999) {
-//                        Text("Quantity: \(item.quantity ?? 0)")
-//                    }
-//
-//                    TextField("Unit (optional)", text: Binding(
-//                        get: { item.unit ?? "" },
-//                        set: { item.unit = $0 }
-//                    ))
-//                }
-
                 Section("Category") {
                     Button {
                         showCategoryPicker = true

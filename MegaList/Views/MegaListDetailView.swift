@@ -13,7 +13,7 @@ struct MegaListDetailView: View {
     @Bindable var list: MegaList
     @State var viewModel: MegaListDetailViewModel
     
-    @State private var showingAddItemSheet = false
+    @State private var showAddItem = false
     @State private var newItemTitle = ""
     
     @State private var itemBeingEdited: MegaItem?
@@ -28,64 +28,78 @@ struct MegaListDetailView: View {
         _viewModel = State(initialValue: MegaListDetailViewModel(list: list))
     }
     
+    var usedCategories: [Category] {
+        let categories = list.items.compactMap { $0.category }
+        return Array(Set(categories))
+            .sorted { $0.name < $1.name }
+    }
+
     var body: some View {
-        NavigationStack {
-            ZStack(alignment: .bottomTrailing) {
-                List {
-                    ForEach(viewModel.sortedItems) { item in
-                        MegaItemRow(item: item) {
+        ZStack(alignment: .bottomTrailing) {
+            List {
+                ForEach(viewModel.activeItems) { item in
+                    MegaItemRow(
+                        item: item,
+                        onCategoryTap: {
                             selectedItemForCategory = item
                             showingCategoryPicker = true
+                        },
+                        onEdit: {
+                            itemBeingEdited = item
+                        },
+                        onDelete: {
+                            context.delete(item)
                         }
-                        .swipeActions {
-                            Button {
-                                itemBeingEdited = item
-                            } label: {
-                                Image(systemName: "pencil")
-                            }
-                            .tint(.blue)
-                            
-                            Button(role: .destructive) {
-                                context.delete(item)
-                            } label: {
-                                Image(systemName: "trash")
-                            }
-                        }
-                    }
+                    )
                 }
                 
-                VStack {
-                    Button {
-                        showingAddItemSheet = true
-                    } label: {
-                        Image(systemName: "plus")
-                            .font(.system(size: 24))
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.accentColor)
-                            .clipShape(Circle())
-                            .shadow(radius: 4)
-                    }
-                    .padding(.trailing, 20)
-                    .padding(.bottom, 20)
+                ForEach(viewModel.completedItems) { item in
+                    MegaItemRow(
+                        item: item,
+                        onCategoryTap: nil,
+                        onEdit: nil,
+                        onDelete: {
+                            context.delete(item)
+                        }
+                    )
+                    
                 }
             }
-            .navigationTitle(list.title)
-            .navigationDestination(isPresented: $showingCategoryPicker) {
-                if let item = selectedItemForCategory {
-                    CategoryPickerView(
-                        selectedCategory: Binding(
-                            get: { item.category },
-                            set: { item.category = $0 }
-                        ),
-                        usedCategories: list.items.compactMap { $0.category },
-                        allCategories: categories)
+            
+            VStack {
+                Button {
+                    showAddItem = true
+                } label: {
+                    Image(systemName: "plus")
+                        .font(.system(size: 24))
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.accentColor)
+                        .clipShape(Circle())
+                        .shadow(radius: 4)
                 }
+                .padding(.trailing, 20)
+                .padding(.bottom, 20)
             }
-            .sheet(item: $itemBeingEdited) { editing in
-                EditItemSheet(item: editing, categories: categories)
+        }
+        .navigationTitle($list.title)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(isPresented: $showAddItem) {
+            AddItemView(list: list)
+        }
+        .navigationDestination(isPresented: $showingCategoryPicker) {
+            if let item = selectedItemForCategory {
+                CategoryPickerView(
+                    selectedCategory: Binding(
+                        get: { item.category },
+                        set: { item.category = $0 }
+                    ),
+                    usedCategories: usedCategories,
+                    allCategories: categories)
             }
-
+        }
+        .sheet(item: $itemBeingEdited) { editing in
+            EditItemSheet(item: editing, categories: categories)
         }
     }
 }

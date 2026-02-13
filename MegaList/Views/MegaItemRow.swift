@@ -9,7 +9,9 @@ import SwiftUI
 
 struct MegaItemRow: View {
     @Bindable var item: MegaItem
-    var onCategoryTap: (() -> Void)
+    var onCategoryTap: (() -> Void)?
+    let onEdit: (() -> Void)?
+    let onDelete: (() -> Void)?
 
     var body: some View {
         HStack(spacing: 12) {
@@ -30,8 +32,11 @@ struct MegaItemRow: View {
             
             Spacer()
             
+            
             Button {
-                onCategoryTap()
+                if let onCategoryTap {
+                    onCategoryTap()
+                }
             } label : {
                 if let emoji = item.category?.emoji {
                     Text(emoji)
@@ -42,6 +47,21 @@ struct MegaItemRow: View {
             }
             .buttonStyle(.plain)
             
+            
+        }
+        .swipeActions {
+            if let onEdit {
+                Button(action: onEdit) {
+                    Image(systemName: "pencil")
+                }
+                .tint(.blue)
+            }
+
+            if let onDelete {
+                Button(role: .destructive, action: onDelete) {
+                    Image(systemName: "trash")
+                }
+            }
         }
         .padding(.vertical, 6)
     }
@@ -53,8 +73,8 @@ struct MegaItemRow_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            MegaItemRow(item: item1, onCategoryTap: {})
-            MegaItemRow(item: item2, onCategoryTap: {})
+            MegaItemRow(item: item1, onCategoryTap: {}, onEdit: {}, onDelete: {})
+            MegaItemRow(item: item2, onCategoryTap: {}, onEdit: {}, onDelete: {})
         }
         .previewLayout(.sizeThatFits)
     }

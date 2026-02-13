@@ -6,14 +6,21 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct AddItemView: View {
     let list: MegaList
     
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
+    @Query var categories: [Category]
 
     @State private var viewModel: AddItemViewModel
+    
+    init(list: MegaList) {
+        self.list = list
+        _viewModel = State(wrappedValue: AddItemViewModel(list: list))
+    }
     
     @State private var showingCategoryPicker: Bool = false
     
@@ -31,26 +38,43 @@ struct AddItemView: View {
                     HStack {
                         Text("Category")
                         Spacer()
-                        Text(viewModel.selectedCategory?.name ?? "None")
+                        Text(viewModel.selectedCategory?.emoji ?? "🏷️")
                             .foregroundStyle(.secondary)
                     }
                 }
                 
                 
                 if let templateFields = list.template?.fields {
-                    if !templateFields.isEmpty {
-                        ForEach(templateFields) { field in
-                            Text(field.name)
-                                .font(.title2)
-                                .padding(.vertical, 8)
-                            // TODO: figure out how to set values in viewmodel - TextField("Enter Value", text:
+                    ForEach(templateFields) { field in
+                        switch field.type {
+
+                        case .text:
+                            TextField(field.name,
+                                      text: viewModel.textBinding(for: field))
+
+                        case .boolean:
+                            Toggle(field.name,
+                                   isOn: viewModel.boolBinding(for: field))
+
+                        case .date:
+                            DatePicker(field.name,
+                                       selection: viewModel.dateBinding(for: field),
+                                       displayedComponents: .date)
+
+                        case .number:
+                            TextField(field.name,
+                                      value: viewModel.numberBinding(for: field),
+                                      format: .number)
+                                .keyboardType(.decimalPad)
                         }
                     }
                 }
+
                 
                 Button("Create") {
                     if(viewModel.canCreate) {
                         viewModel.createItem(in: context)
+                        dismiss()
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -60,9 +84,25 @@ struct AddItemView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 12))
             }
         }
+        .navigationDestination(isPresented: $showingCategoryPicker) {
+            CategoryPickerView(
+                selectedCategory: $viewModel.selectedCategory,
+                usedCategories: [],
+                allCategories: categories
+            )
+        }
         .navigationTitle("New Item")
     }
 }
 
 #Preview {
+    let container = MockData.containerWithSampleData()
+    let context = container.mainContext
+
+    let list = try! context.fetch(FetchDescriptor<MegaList>())
+        .first(where: { $0.template != nil })!
+
+    AddItemView(list: list)
+        .modelContainer(container)
 }
+

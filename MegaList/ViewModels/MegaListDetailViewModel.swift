@@ -25,11 +25,16 @@ class MegaListDetailViewModel {
                 return lhsCategoryName < rhsCategoryName
             }
             
-            if lhs.isDone != rhs.isDone {
-                return !lhs.isDone && rhs.isDone
-            }
-            
             return lhs.name < rhs.name
         }
+    }
+
+    
+    var activeItems: [MegaItem] {
+        sortedItems.filter { !$0.isDone }
+    }
+
+    var completedItems: [MegaItem] {
+        sortedItems.filter { $0.isDone }
     }
 }

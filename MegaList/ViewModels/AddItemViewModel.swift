@@ -5,16 +5,19 @@
 //  Created by Petra Koszegi on 09/02/2026.
 //
 
-import Foundation
+import SwiftUI
 import SwiftData
 
 @Observable
-class AddItemViewModel{
+@MainActor
+final class AddItemViewModel {
 
     let list: MegaList
 
     var name: String = ""
     var selectedCategory: Category?
+
+    // One value per template field
     var fieldValues: [UUID: ItemFieldValue] = [:]
 
     init(list: MegaList) {
@@ -28,6 +31,52 @@ class AddItemViewModel{
         for field in fields {
             fieldValues[field.id] = ItemFieldValue(field: field)
         }
+    }
+
+    // MARK: - Bindings
+
+    func textBinding(for field: TemplateField) -> Binding<String> {
+        Binding(
+            get: {
+                self.fieldValues[field.id]?.textValue ?? ""
+            },
+            set: {
+                self.fieldValues[field.id]?.textValue = $0
+            }
+        )
+    }
+
+    func boolBinding(for field: TemplateField) -> Binding<Bool> {
+        Binding(
+            get: {
+                self.fieldValues[field.id]?.boolValue ?? false
+            },
+            set: {
+                self.fieldValues[field.id]?.boolValue = $0
+            }
+        )
+    }
+
+    func dateBinding(for field: TemplateField) -> Binding<Date> {
+        Binding(
+            get: {
+                self.fieldValues[field.id]?.dateValue ?? Date()
+            },
+            set: {
+                self.fieldValues[field.id]?.dateValue = $0
+            }
+        )
+    }
+
+    func numberBinding(for field: TemplateField) -> Binding<Double> {
+        Binding(
+            get: {
+                self.fieldValues[field.id]?.numberValue ?? 0
+            },
+            set: {
+                self.fieldValues[field.id]?.numberValue = $0
+            }
+        )
     }
 
     var canCreate: Bool {

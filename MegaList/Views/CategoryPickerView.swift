@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CategoryPickerView: View {
     @Environment(\.modelContext) private var context
+    @Environment(\.dismiss) private var dismiss
+
     @Binding var selectedCategory: Category?
     var usedCategories: [Category]
     var allCategories: [Category]
@@ -26,6 +28,7 @@ struct CategoryPickerView: View {
                             CategoryRow(category: category, isSelected: selectedCategory == category)
                                 .onTapGesture {
                                     selectedCategory = category
+                                    dismiss()
                                 }
                         }
                     }
@@ -37,6 +40,7 @@ struct CategoryPickerView: View {
                             CategoryRow(category: category, isSelected: selectedCategory == category)
                                 .onTapGesture {
                                     selectedCategory = category
+                                    dismiss()
                                 }
                         }
                     }
@@ -65,6 +69,7 @@ struct CategoryPickerView: View {
                     context.insert(newCategory)
                     selectedCategory = newCategory
                     showAddSheet = false
+                    dismiss()
                 }
             }
         }

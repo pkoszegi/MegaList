@@ -17,6 +17,11 @@ final class AddItemViewModel {
     var name: String = ""
     var selectedCategory: Category?
 
+    var usedCategories: [Category] {
+        let categoriesInList = list.items.compactMap { $0.category }
+        return Array(Set(categoriesInList))
+    }
+    
     // One value per template field
     var fieldValues: [UUID: ItemFieldValue] = [:]
 

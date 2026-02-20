@@ -19,6 +19,10 @@ struct CategoryPickerView: View {
 
     var unusedCategories: [Category] { allCategories.filter{ !usedCategories.contains($0) } }
     
+    var usedEmojis: Set<String> {
+        Set(usedCategories.compactMap { $0.emoji })
+    }
+    
     var body: some View {
         NavigationStack {
             List {
@@ -56,7 +60,7 @@ struct CategoryPickerView: View {
             }
             .navigationTitle("Select Category")
             .sheet(isPresented: $showAddSheet) {
-                AddCategorySheet { newCategory in
+                AddCategorySheet(usedEmojis: usedEmojis) { newCategory in
                     if allCategories.contains(where: {
                         $0.name.lowercased() == newCategory.name.lowercased() ||
                         $0.emoji == newCategory.emoji

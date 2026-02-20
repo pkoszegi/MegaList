@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EmojiPickerView: View {
     @Binding var selectedEmoji: String
+    var emojis: Array<String>
 
     private let columns = [
         GridItem(.adaptive(minimum: 44))
@@ -17,7 +18,7 @@ struct EmojiPickerView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 16) {
-                ForEach(EmojiRepository.defaults, id: \.self) { emoji in
+                ForEach(emojis, id: \.self) { emoji in
                     Text(emoji)
                         .font(.largeTitle)
                         .frame(width: 44, height: 44)
@@ -28,7 +29,9 @@ struct EmojiPickerView: View {
                         )
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                         .onTapGesture {
-                            selectedEmoji = emoji
+                            withAnimation {
+                                selectedEmoji = emoji
+                            }
                         }
                 }
             }
@@ -38,5 +41,5 @@ struct EmojiPickerView: View {
 }
 
 #Preview {
-    EmojiPickerView(selectedEmoji: .constant(""))
+    EmojiPickerView(selectedEmoji: .constant(""), emojis: EmojiRepository.defaults)
 }

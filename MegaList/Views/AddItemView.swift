@@ -87,7 +87,7 @@ struct AddItemView: View {
         .navigationDestination(isPresented: $showingCategoryPicker) {
             CategoryPickerView(
                 selectedCategory: $viewModel.selectedCategory,
-                usedCategories: [],
+                usedCategories: viewModel.usedCategories,
                 allCategories: categories
             )
         }

@@ -10,9 +10,21 @@ import SwiftUI
 struct AddCategorySheet: View {
     @State private var name = ""
     @State private var emoji = ""
-
+    
+    @State private var showingCustomEmojiInput = false
+    
+    let usedEmojis: Set<String>
     var onAdd: (Category) -> Void
 
+    var availableEmojis: [String] {
+        EmojiRepository.defaults.filter { !usedEmojis.contains($0) }
+    }
+    
+    var canCreate: Bool {
+        !name.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !emoji.isEmpty
+    }
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -20,30 +32,45 @@ struct AddCategorySheet: View {
                     TextField("Category name", text: $name)
                 }
 
-                Section("Emoji") {
-                    TextField("Emoji", text: $emoji)
-                        .autocorrectionDisabled()
-                }
-
-                Button("Create") {
-                    guard !name.trimmingCharacters(in: .whitespaces).isEmpty,
-                          !emoji.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-
-                    onAdd(
-                        Category(name: name.trimmingCharacters(in: .whitespaces),
-                                 emoji: emoji.trimmingCharacters(in: .whitespaces))
+                Section {
+                    EmojiPickerView(
+                        selectedEmoji: $emoji,
+                        emojis: availableEmojis
                     )
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.accentColor)
-                .foregroundStyle(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+                header: {
+                    HStack {
+                        Text("Emoji")
+                        Spacer()
+                        Button {
+                            showingCustomEmojiInput = true
+                        } label: {
+                            Image(systemName: "plus.circle")
+                        }
+                    }
+                }
+                .sheet(isPresented: $showingCustomEmojiInput) {
+                    CustomEmojiInputView(
+                        usedEmojis: usedEmojis
+                    ) { newEmoji in
+                        emoji = newEmoji
+                    }
+                    .presentationDetents([.medium])
+                }
                 
             }
-            .navigationTitle("New Category")
-            .navigationBarTitleDisplayMode(.inline)
-            .presentationDetents([.medium])
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Create") {
+                        onAdd(
+                            Category(
+                                name: name.trimmingCharacters(in: .whitespaces),
+                                emoji: emoji)
+                        )
+                    }
+                    .disabled(!canCreate)
+                }
+            }
         }
     }
 }
@@ -52,7 +79,7 @@ struct AddCategorySheet: View {
 struct AddCategorySheet_Previews: PreviewProvider {
     static var previews: some View {
         
-        AddCategorySheet { newCategory in
+        AddCategorySheet(usedEmojis: []) { newCategory in
             print(newCategory.name)
         }
         .previewDisplayName("Add Category Sheet")

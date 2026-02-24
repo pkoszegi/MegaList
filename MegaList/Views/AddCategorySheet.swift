@@ -30,6 +30,9 @@ struct AddCategorySheet: View {
             Form {
                 Section("Name") {
                     TextField("Category name", text: $name)
+                        .overlay(alignment: .trailing) {
+                            Text(emoji)
+                        }
                 }
 
                 Section {
@@ -49,15 +52,15 @@ struct AddCategorySheet: View {
                         }
                     }
                 }
-                .sheet(isPresented: $showingCustomEmojiInput) {
-                    CustomEmojiInputView(
-                        usedEmojis: usedEmojis
-                    ) { newEmoji in
-                        emoji = newEmoji
-                    }
-                    .presentationDetents([.medium])
-                }
                 
+            }
+            .sheet(isPresented: $showingCustomEmojiInput) {
+                CustomEmojiInputView(
+                    usedEmojis: usedEmojis
+                ) { newEmoji in
+                    emoji = newEmoji
+                }
+                .presentationDetents([.medium])
             }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {

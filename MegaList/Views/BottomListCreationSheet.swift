@@ -7,20 +7,18 @@
 
 import SwiftUI
 
-struct BottomInputSheet: View {
+struct BottomListCreationSheet: View {
+    @Environment(\.modelContext) private var context
+
     @Binding var isPresented: Bool
-    var title: String
-    var placeholder: String
-    @Binding var text: String
-    var actionTitle: String = "Add"
-    var action:() -> Void
-    
+    @Bindable var viewModel: ListCreationViewModel
+
     @FocusState private var isFocused: Bool
 
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text(title)
+                Text("Create list")
                     .font(.headline)
                 
                 Spacer()
@@ -38,14 +36,20 @@ struct BottomInputSheet: View {
             
             VStack(spacing: 16) {
                 
-                TextField(placeholder, text: $text)
+                TextField("Enter title", text: $viewModel.title)
                     .textFieldStyle(.roundedBorder)
                     .focused($isFocused)
                     .padding(.horizontal)
                 
-                Button(actionTitle) {
-                    guard !text.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-                    action()
+                Picker("Template", selection: $viewModel.selectedTemplate) {
+                    Text("Choose template").tag(nil as ListTemplate?)
+                    ForEach(viewModel.availableTemplates) { template in
+                        Text(template.name).tag(template as ListTemplate?)
+                    }
+                }
+                
+                Button("Add") {
+                    viewModel.create(in: context)
                     isPresented = false
                 }
                 .frame(maxWidth: .infinity)
@@ -56,17 +60,13 @@ struct BottomInputSheet: View {
                 .padding(.horizontal)
             }
             .padding(.top)
-            .animation(.easeInOut(duration: 0.2), value: isFocused)
         }
         .onAppear {
-            DispatchQueue.main.async {
-                isFocused = true
-            }
+            isFocused = true
         }
-        .presentationDetents([.height(200)])
+        .presentationDetents([.height(250)])
     }
 }
 
 #Preview {
-    BottomInputSheet(isPresented: .constant(true), title: "Title", placeholder: "Enter title", text: .constant(""), action: { print("Action triggered") })
 }

@@ -12,7 +12,7 @@ struct MegaListHomeView: View {
     @Query(sort: \MegaList.title) private var lists: [MegaList]
     
     @State private var showingAddSheet = false
-    @State private var newListTitle = ""
+    @State private var listCreationVM = ListCreationViewModel()
     
     @FocusState private var isTitleFieldFocused: Bool
     
@@ -40,17 +40,10 @@ struct MegaListHomeView: View {
                 }
             }
             .sheet(isPresented: $showingAddSheet) {
-                BottomInputSheet(
+                BottomListCreationSheet(
                     isPresented: $showingAddSheet,
-                    title: "Create New List",
-                    placeholder: "Enter title",
-                    text: $newListTitle,
-                    actionTitle: "Add"
-                ) {
-                    let list = MegaList(title: newListTitle)
-                    context.insert(list)
-                    newListTitle = ""
-                }
+                    viewModel: listCreationVM
+                )
             }
             .navigationTitle("MegaList")
         }

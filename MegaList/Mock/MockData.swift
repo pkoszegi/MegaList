@@ -17,7 +17,12 @@ struct MockData {
         do {
             let config = ModelConfiguration(isStoredInMemoryOnly: true)
             return try ModelContainer(
-                for: MegaList.self, Category.self, MegaItem.self,
+                for: MegaList.self,
+                Category.self,
+                MegaItem.self,
+                ListTemplate.self,
+                TemplateField.self,
+                ItemFieldValue.self,
                 configurations: config
             )
         } catch {
@@ -47,4 +52,3 @@ struct MockData {
         return container
     }
 }
-

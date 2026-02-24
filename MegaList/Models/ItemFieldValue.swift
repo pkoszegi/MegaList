@@ -12,6 +12,7 @@ import SwiftData
 class ItemFieldValue {
     @Attribute(.unique) var id: UUID
     
+    var fieldID: UUID
     var fieldName: String
     var type: FieldType
     
@@ -22,6 +23,7 @@ class ItemFieldValue {
     
     init(field: TemplateField) {
         self.id = UUID()
+        self.fieldID = field.id
         self.fieldName = field.name
         self.type = field.type
     }

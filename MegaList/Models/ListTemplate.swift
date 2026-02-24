@@ -14,6 +14,7 @@ class ListTemplate {
     var name: String
     @Relationship(deleteRule: .cascade)
     var fields: [TemplateField] = []
+
     
     init(name: String, fields: [TemplateField]) {
         self.id = UUID()
@@ -27,4 +28,13 @@ extension ListTemplate {
     static let chores: ListTemplate = .init(name: "Chores", fields: [TemplateField(name: "room", type: .text), TemplateField(name: "deadline", type: .date)])
     static let packingList: ListTemplate = .init(name: "Packing List", fields: [TemplateField(name: "quantity", type: .number), TemplateField(name: "bag", type: .text)])
     static let projects: ListTemplate = .init(name: "Projects", fields: [TemplateField(name: "started", type: .date), TemplateField(name: "deadline", type: .date), TemplateField(name: "priority", type: .number)])
+}
+
+enum BuiltInTemplates {
+    static let all: [ListTemplate] = [
+        .groceries,
+        .chores,
+        .packingList,
+        .projects
+    ]
 }

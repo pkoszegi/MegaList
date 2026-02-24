@@ -16,7 +16,7 @@ enum FieldType: String, Codable {
 }
 
 @Model
-class TemplateField {
+class TemplateField: Identifiable, Hashable {
     @Attribute(.unique) var id: UUID
     var name: String
     var type: FieldType

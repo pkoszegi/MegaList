@@ -44,32 +44,12 @@ struct AddItemView: View {
                 }
                 
                 
-                if let templateFields = list.template?.fields {
-                    ForEach(templateFields) { field in
-                        switch field.type {
-
-                        case .text:
-                            TextField(field.name,
-                                      text: viewModel.textBinding(for: field))
-
-                        case .boolean:
-                            Toggle(field.name,
-                                   isOn: viewModel.boolBinding(for: field))
-
-                        case .date:
-                            DatePicker(field.name,
-                                       selection: viewModel.dateBinding(for: field),
-                                       displayedComponents: .date)
-
-                        case .number:
-                            TextField(field.name,
-                                      value: viewModel.numberBinding(for: field),
-                                      format: .number)
-                                .keyboardType(.decimalPad)
-                        }
-                    }
+                if let template = list.template {
+                    TemplateFieldsSection(
+                        template: template,
+                        controller: viewModel.fieldController
+                    )
                 }
-
                 
                 Button("Create") {
                     if(viewModel.canCreate) {

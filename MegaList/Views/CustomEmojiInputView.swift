@@ -16,8 +16,7 @@ struct CustomEmojiInputView: View {
     @State private var input = ""
 
     var isValid: Bool {
-        !input.isEmpty &&
-        input.count <= 2 &&
+        input.isSingleEmoji &&
         !usedEmojis.contains(input)
     }
 
@@ -40,6 +39,13 @@ struct CustomEmojiInputView: View {
             .navigationTitle("Custom Emoji")
             .navigationBarTitleDisplayMode(.inline)
         }
+    }
+}
+
+extension String {
+    var isSingleEmoji: Bool {
+        guard count == 1 else { return false }
+        return unicodeScalars.first?.properties.isEmojiPresentation == true
     }
 }
 

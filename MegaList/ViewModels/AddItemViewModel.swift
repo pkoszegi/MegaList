@@ -22,66 +22,11 @@ final class AddItemViewModel {
         return Array(Set(categoriesInList))
     }
     
-    // One value per template field
-    var fieldValues: [UUID: ItemFieldValue] = [:]
+    let fieldController: ItemFieldValuesController
 
     init(list: MegaList) {
         self.list = list
-        initializeFieldValues()
-    }
-
-    private func initializeFieldValues() {
-        guard let fields = list.template?.fields else { return }
-
-        for field in fields {
-            fieldValues[field.id] = ItemFieldValue(field: field)
-        }
-    }
-
-    // MARK: - Bindings
-
-    func textBinding(for field: TemplateField) -> Binding<String> {
-        Binding(
-            get: {
-                self.fieldValues[field.id]?.textValue ?? ""
-            },
-            set: {
-                self.fieldValues[field.id]?.textValue = $0
-            }
-        )
-    }
-
-    func boolBinding(for field: TemplateField) -> Binding<Bool> {
-        Binding(
-            get: {
-                self.fieldValues[field.id]?.boolValue ?? false
-            },
-            set: {
-                self.fieldValues[field.id]?.boolValue = $0
-            }
-        )
-    }
-
-    func dateBinding(for field: TemplateField) -> Binding<Date> {
-        Binding(
-            get: {
-                self.fieldValues[field.id]?.dateValue ?? Date()
-            },
-            set: {
-                self.fieldValues[field.id]?.dateValue = $0
-            }
-        )
-    }
-
-    func numberBinding(for field: TemplateField) -> Binding<Double> {
-        Binding(
-            get: {
-                self.fieldValues[field.id]?.numberValue ?? 0
-            },
-            set: {
-                self.fieldValues[field.id]?.numberValue = $0
-            }
-        )
+        self.fieldController = ItemFieldValuesController(template: list.template)
     }
 
     var canCreate: Bool {
@@ -96,8 +41,8 @@ final class AddItemViewModel {
         )
 
         item.parentList = list
-        item.fieldValues = Array(fieldValues.values)
-
+        item.fieldValues = fieldController.allValues
+        
         context.insert(item)
     }
 }

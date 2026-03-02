@@ -37,9 +37,9 @@ struct EditItemSheet: View {
                         showCategoryPicker = true
                     } label: {
                         HStack {
-                            Text("Category")
+                            Text(viewModel.item.category?.name ?? "None")
                             Spacer()
-                            Text(viewModel.item.category?.emoji ?? "None")
+                            Text(viewModel.item.category?.emoji ?? "")
                                 .font(.title3)
                         }
                     }

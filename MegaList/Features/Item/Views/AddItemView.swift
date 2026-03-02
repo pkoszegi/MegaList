@@ -16,6 +16,7 @@ struct AddItemView: View {
     @Query var categories: [Category]
 
     @State private var viewModel: AddItemViewModel
+    @FocusState private var nameIsFocused: Bool
     
     init(list: MegaList) {
         self.list = list
@@ -26,52 +27,61 @@ struct AddItemView: View {
     
     var body: some View {
         NavigationStack {
-            
-            List {
-                TextField("Item name", text: $viewModel.name)
-                    .font(.title2)
-                    .padding(.vertical, 8)
-                
-                Button {
-                    showingCategoryPicker = true
-                } label: {
-                    HStack {
-                        Text("Category")
-                        Spacer()
-                        Text(viewModel.selectedCategory?.emoji ?? "🏷️")
-                            .foregroundStyle(.secondary)
+            Form {
+                Section("Name") {
+                    TextField("Item name", text: $viewModel.name)
+                        .focused($nameIsFocused)
+                }
+
+                Section("Category") {
+                    Button {
+                        showingCategoryPicker = true
+                    } label: {
+                        HStack {
+                            Text(viewModel.selectedCategory?.name ?? "None")
+                            Spacer()
+                            Text(viewModel.selectedCategory?.emoji ?? "")
+                                .font(.title3)
+                        }
                     }
                 }
-                
-                
+
                 if let template = list.template {
                     TemplateFieldsSection(
                         template: template,
                         controller: viewModel.fieldController
                     )
                 }
-                
-                Button("Create") {
-                    if(viewModel.canCreate) {
-                        viewModel.createItem(in: context)
+            }
+            .navigationTitle("New Item")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden()
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
                         dismiss()
                     }
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.accentColor)
-                .foregroundStyle(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Create") {
+                        viewModel.createItem(in: context)
+                        dismiss()
+                    }
+                    .disabled(!viewModel.canCreate)
+                }
+            }
+            .sheet(isPresented: $showingCategoryPicker) {
+                CategoryPickerView(
+                    selectedCategory: $viewModel.selectedCategory,
+                    usedCategories: viewModel.usedCategories,
+                    allCategories: categories
+                )
+            }
+            .onAppear {
+                nameIsFocused = true
             }
         }
-        .navigationDestination(isPresented: $showingCategoryPicker) {
-            CategoryPickerView(
-                selectedCategory: $viewModel.selectedCategory,
-                usedCategories: viewModel.usedCategories,
-                allCategories: categories
-            )
-        }
-        .navigationTitle("New Item")
     }
 }
 
@@ -85,4 +95,3 @@ struct AddItemView: View {
     AddItemView(list: list)
         .modelContainer(container)
 }
-

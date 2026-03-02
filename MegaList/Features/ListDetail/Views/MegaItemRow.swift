@@ -33,20 +33,18 @@ struct MegaItemRow: View {
             
             Spacer()
             
-            
-            Button {
-                if let onCategoryTap {
-                    onCategoryTap()
-                }
-            } label : {
-                if let emoji = item.category?.emoji {
+            if let emoji = item.category?.emoji {
+                Button {
+                    if let onCategoryTap {
+                        onCategoryTap()
+                    }
+                } label : {
                     Text(emoji)
                         .font(.system(size: 22))
-                } else {
-                    Image(systemName: "tag")
                 }
+                .buttonStyle(.plain)
             }
-            .buttonStyle(.plain)
+            
             
             
         }

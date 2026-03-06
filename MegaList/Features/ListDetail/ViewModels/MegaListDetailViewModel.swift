@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 @Observable
-class MegaListDetailViewModel {
+final class MegaListDetailViewModel {
     func sortedItems(from items: [MegaItem]) -> [MegaItem] {
         items.sorted { lhs, rhs in
             let lhsCategoryName = lhs.category?.name ?? "zzz"

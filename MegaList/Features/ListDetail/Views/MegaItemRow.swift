@@ -1,5 +1,5 @@
 //
-//  MegaListItemRow.swift
+//  MegaItemRow.swift
 //  MegaList
 //
 //  Created by Petra Koszegi on 17/11/2025.

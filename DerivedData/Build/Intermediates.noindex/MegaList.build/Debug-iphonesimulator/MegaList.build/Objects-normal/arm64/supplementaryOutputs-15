@@ -1,0 +1,30 @@
+{
+  "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "object" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps"
+  },
+  "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/MegaList/Features/ListDetail/Views/MegaListDetailView.swift" : {
+    "const-values" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/MegaListDetailView.swiftconstvalues",
+    "dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/MegaListDetailView.d",
+    "diagnostics" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/MegaListDetailView.dia",
+    "object" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/MegaListDetailView.o",
+    "swift-dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/MegaListDetailView.swiftdeps"
+  },
+  "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/MegaList/Features/Template/ViewModels/CreateTemplateViewModel.swift" : {
+    "const-values" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/CreateTemplateViewModel.swiftconstvalues",
+    "dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/CreateTemplateViewModel.d",
+    "diagnostics" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/CreateTemplateViewModel.dia",
+    "object" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/CreateTemplateViewModel.o",
+    "swift-dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/CreateTemplateViewModel.swiftdeps"
+  },
+  "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/MegaList/Features/Template/Views/CreateTemplateView.swift" : {
+    "const-values" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/CreateTemplateView.swiftconstvalues",
+    "dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/CreateTemplateView.d",
+    "diagnostics" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/CreateTemplateView.dia",
+    "object" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/CreateTemplateView.o",
+    "swift-dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/CreateTemplateView.swiftdeps"
+  }
+}

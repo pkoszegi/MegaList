@@ -1,0 +1,29 @@
+{
+  "" : {
+    "diagnostics" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITests-primary.dia",
+    "emit-module-dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITests-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITests-primary-emit-module.dia",
+    "pch" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITests-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITests-primary.swiftdeps"
+  },
+  "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/MegaListUITests/MegaListUITests.swift" : {
+    "const-values" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITests.swiftconstvalues",
+    "dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITests.d",
+    "diagnostics" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITests.dia",
+    "index-unit-output-path" : "/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITests.o",
+    "llvm-bc" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITests.bc",
+    "object" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITests.o",
+    "swift-dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITests.swiftdeps",
+    "swiftmodule" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITests~partial.swiftmodule"
+  },
+  "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/MegaListUITests/MegaListUITestsLaunchTests.swift" : {
+    "const-values" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITestsLaunchTests.swiftconstvalues",
+    "dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITestsLaunchTests.d",
+    "diagnostics" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITestsLaunchTests.dia",
+    "index-unit-output-path" : "/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITestsLaunchTests.o",
+    "llvm-bc" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITestsLaunchTests.bc",
+    "object" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITestsLaunchTests.o",
+    "swift-dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITestsLaunchTests.swiftdeps",
+    "swiftmodule" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphoneos/MegaListUITests.build/Objects-normal/arm64/MegaListUITestsLaunchTests~partial.swiftmodule"
+  }
+}

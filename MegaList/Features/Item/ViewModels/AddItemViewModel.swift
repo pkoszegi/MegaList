@@ -30,10 +30,6 @@ final class AddItemViewModel {
     }
 
     var canCreate: Bool {
-        Self.validate(name: name)
-    }
-
-    static func validate(name: String) -> Bool {
         !name.trimmingCharacters(in: .whitespaces).isEmpty
     }
 

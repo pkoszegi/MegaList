@@ -21,23 +21,6 @@ struct CreateTemplateView: View {
         [.text, .number, .date, .boolean]
     }
 
-    private var existingTemplateNames: Set<String> {
-        Set(
-            existingTemplates.map {
-                $0.name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-            }
-        )
-        .union(BuiltInTemplates.names)
-    }
-
-    private var canCreate: Bool {
-        viewModel.canCreate(existingTemplateNames: existingTemplateNames)
-    }
-
-    private var hasDuplicateTemplateName: Bool {
-        viewModel.hasDuplicateTemplateName(in: existingTemplateNames)
-    }
-
     var body: some View {
         @Bindable var viewModel = viewModel
 
@@ -45,7 +28,7 @@ struct CreateTemplateView: View {
             Form {
                 Section("Template") {
                     TextField("Template name", text: $viewModel.templateName)
-                    if hasDuplicateTemplateName {
+                    if viewModel.hasDuplicateTemplateName {
                         Text("Template name already exists.")
                             .font(.caption)
                             .foregroundStyle(.red)
@@ -81,6 +64,7 @@ struct CreateTemplateView: View {
             }
             .navigationTitle("New Template")
             .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden()
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") { dismiss() }
@@ -92,9 +76,15 @@ struct CreateTemplateView: View {
                         onCreate(createdTemplate)
                         dismiss()
                     }
-                    .disabled(!canCreate)
+                    .disabled(!viewModel.canCreate)
                 }
             }
+        }
+        .onAppear {
+            viewModel.updateExistingTemplateNames(using: existingTemplates)
+        }
+        .onChange(of: existingTemplates.map(\.name)) { _, _ in
+            viewModel.updateExistingTemplateNames(using: existingTemplates)
         }
     }
 }

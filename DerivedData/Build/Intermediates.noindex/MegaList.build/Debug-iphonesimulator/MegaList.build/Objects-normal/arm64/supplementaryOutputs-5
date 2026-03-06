@@ -1,0 +1,30 @@
+{
+  "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/MegaList/Core/Models/TemplateField.swift" : {
+    "const-values" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/TemplateField.swiftconstvalues",
+    "dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/TemplateField.d",
+    "diagnostics" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/TemplateField.dia",
+    "object" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/TemplateField.o",
+    "swift-dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/TemplateField.swiftdeps"
+  },
+  "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/MegaList/Features/Category/Models/EmojiRepository.swift" : {
+    "const-values" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/EmojiRepository.swiftconstvalues",
+    "dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/EmojiRepository.d",
+    "diagnostics" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/EmojiRepository.dia",
+    "object" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/EmojiRepository.o",
+    "swift-dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/EmojiRepository.swiftdeps"
+  },
+  "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/MegaList/Features/Category/ViewModels/AddCategoryViewModel.swift" : {
+    "const-values" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/AddCategoryViewModel.swiftconstvalues",
+    "dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/AddCategoryViewModel.d",
+    "diagnostics" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/AddCategoryViewModel.dia",
+    "object" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/AddCategoryViewModel.o",
+    "swift-dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/AddCategoryViewModel.swiftdeps"
+  },
+  "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/MegaList/Features/Category/ViewModels/CategoryPickerViewModel.swift" : {
+    "const-values" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/CategoryPickerViewModel.swiftconstvalues",
+    "dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/CategoryPickerViewModel.d",
+    "diagnostics" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/CategoryPickerViewModel.dia",
+    "object" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/CategoryPickerViewModel.o",
+    "swift-dependencies" : "/Users/petrakoszegi/Desktop/Petra/Projects/Portfolio/MegaList/DerivedData/Build/Intermediates.noindex/MegaList.build/Debug-iphonesimulator/MegaList.build/Objects-normal/arm64/CategoryPickerViewModel.swiftdeps"
+  }
+}

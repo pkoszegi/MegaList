@@ -21,33 +21,36 @@ final class CreateTemplateViewModel {
 
     var templateName: String = ""
     var fields: [TemplateFieldDraft] = [TemplateFieldDraft()]
+    private(set) var existingTemplateNames: Set<String> = BuiltInTemplates.names
 
     var canAddField: Bool {
         fields.count < maxFieldCount &&
         fields.allSatisfy(isValidField)
     }
 
-    func hasDuplicateTemplateName(in existingTemplateNames: Set<String>) -> Bool {
-        let normalizedName = templateName
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .lowercased()
-
+    var hasDuplicateTemplateName: Bool {
+        let normalizedName = normalize(templateName)
         guard !normalizedName.isEmpty else { return false }
         return existingTemplateNames.contains(normalizedName)
     }
 
-    func canCreate(existingTemplateNames: Set<String>) -> Bool {
-        let trimmedName = templateName.trimmingCharacters(in: .whitespacesAndNewlines)
+    var canCreate: Bool {
+        let trimmedName = normalize(templateName)
         guard !trimmedName.isEmpty else { return false }
-        guard !hasDuplicateTemplateName(in: existingTemplateNames) else { return false }
+        guard !hasDuplicateTemplateName else { return false }
 
         let normalizedFieldNames = fields
-            .map { $0.name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
+            .map { normalize($0.name) }
             .filter { !$0.isEmpty }
 
         guard normalizedFieldNames.count == fields.count else { return false }
 
         return Set(normalizedFieldNames).count == normalizedFieldNames.count
+    }
+
+    func updateExistingTemplateNames(using customTemplates: [ListTemplate]) {
+        let customNames = customTemplates.map { normalize($0.name) }
+        existingTemplateNames = Set(customNames).union(BuiltInTemplates.names)
     }
 
     func addField() {
@@ -88,5 +91,9 @@ final class CreateTemplateViewModel {
         case .text, .number, .date, .boolean:
             return true
         }
+    }
+
+    private func normalize(_ value: String) -> String {
+        value.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
     }
 }

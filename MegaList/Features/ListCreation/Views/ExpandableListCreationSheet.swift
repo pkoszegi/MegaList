@@ -1,5 +1,5 @@
 //
-//  BottomInputSheet.swift
+//  ExpandableListCreationSheet.swift
 //  MegaList
 //
 //  Created by Petra Koszegi on 17/11/2025.
@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ExpandableListCreationSheet: View {
     @Environment(\.modelContext) private var context
-    @Query(sort: \ListTemplate.name) private var customTemplates: [ListTemplate]
 
     @Binding var isPresented: Bool
     @Bindable var viewModel: ListCreationViewModel
@@ -26,17 +25,22 @@ struct ExpandableListCreationSheet: View {
                 }
 
                 Section {
-                    Picker("Template", selection: $viewModel.selectedTemplate) {
-                        Text("None").tag(nil as ListTemplate?)
-                        ForEach(viewModel.availableTemplates(customTemplates: customTemplates)) { template in
-                            Text(template.name).tag(template as ListTemplate?)
+                    NavigationLink {
+                        TemplatePickerView(
+                            availableTemplates: { customTemplates in
+                                viewModel.availableTemplates(customTemplates: customTemplates)
+                            },
+                            selectedTemplate: $viewModel.selectedTemplate
+                        ) { createdTemplate in
+                            viewModel.didCreateTemplate(createdTemplate)
                         }
-                    }
-
-                    Button {
-                        viewModel.showingCreateTemplate = true
                     } label: {
-                        Label("New Template", systemImage: "plus.circle")
+                        HStack {
+                            Text("Template")
+                            Spacer()
+                            Text(viewModel.selectedTemplate?.name ?? "None")
+                                .foregroundStyle(.secondary)
+                        }
                     }
                 }
             }
@@ -60,11 +64,6 @@ struct ExpandableListCreationSheet: View {
         }
         .onAppear {
             isFocused = true
-        }
-        .sheet(isPresented: $viewModel.showingCreateTemplate) {
-            CreateTemplateView { createdTemplate in
-                viewModel.didCreateTemplate(createdTemplate)
-            }
         }
         .presentationDetents([.medium, .large])
     }

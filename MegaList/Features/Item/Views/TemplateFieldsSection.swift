@@ -46,11 +46,7 @@ struct TemplateFieldsSection: View {
 
         case .number:
             LabeledContent(field.name) {
-                TextField(
-                    "0",
-                    value: controller.numberBinding(for: field),
-                    format: .number
-                )
+                TextField("0", text: controller.numberTextBinding(for: field))
                 .multilineTextAlignment(.trailing)
                 .keyboardType(.decimalPad)
             }

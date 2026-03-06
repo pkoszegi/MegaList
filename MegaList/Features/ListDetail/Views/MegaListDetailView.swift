@@ -11,10 +11,9 @@ struct MegaListDetailView: View {
     @Environment(\.modelContext) private var context
 
     @Bindable var list: MegaList
-    @State var viewModel: MegaListDetailViewModel
+    @State private var viewModel = MegaListDetailViewModel()
     
     @State private var showAddItem = false
-    @State private var newItemTitle = ""
     
     @State private var itemBeingEdited: MegaItem?
     
@@ -25,19 +24,16 @@ struct MegaListDetailView: View {
     
     init(list: MegaList) {
         self.list = list
-        _viewModel = State(initialValue: MegaListDetailViewModel(list: list))
     }
     
     var usedCategories: [Category] {
-        let categories = list.items.compactMap { $0.category }
-        return Array(Set(categories))
-            .sorted { $0.name < $1.name }
+        viewModel.usedCategories(from: list.items)
     }
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             List {
-                ForEach(viewModel.activeItems) { item in
+                ForEach(viewModel.activeItems(from: list.items)) { item in
                     MegaItemRow(
                         item: item,
                         onCategoryTap: {
@@ -53,7 +49,7 @@ struct MegaListDetailView: View {
                     )
                 }
                 
-                ForEach(viewModel.completedItems) { item in
+                ForEach(viewModel.completedItems(from: list.items)) { item in
                     MegaItemRow(
                         item: item,
                         onCategoryTap: nil,

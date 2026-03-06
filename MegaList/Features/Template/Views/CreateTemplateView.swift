@@ -39,6 +39,8 @@ struct CreateTemplateView: View {
     }
 
     var body: some View {
+        @Bindable var viewModel = viewModel
+
         NavigationStack {
             Form {
                 Section("Template") {
@@ -51,22 +53,13 @@ struct CreateTemplateView: View {
                 }
 
                 Section("Fields") {
-                    ForEach(Array(viewModel.fields.enumerated()), id: \.element.id) { index, _ in
+                    ForEach($viewModel.fields) { $field in
                         HStack(spacing: 12) {
-                            TextField(
-                                "Field name",
-                                text: Binding(
-                                    get: { viewModel.fields[index].name },
-                                    set: { viewModel.fields[index].name = $0 }
-                                )
-                            )
+                            TextField("Field name", text: $field.name)
 
                             Picker(
                                 "Type",
-                                selection: Binding(
-                                    get: { viewModel.fields[index].type },
-                                    set: { viewModel.fields[index].type = $0 }
-                                )
+                                selection: $field.type
                             ) {
                                 ForEach(fieldTypeOptions, id: \.self) { type in
                                     Text(type.displayName).tag(type)

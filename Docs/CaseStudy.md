@@ -151,7 +151,7 @@ Tradeoff:
 - Less power
 - More clarity
 
-## Categories on UI
+## Optional Categories in the UI
 
 Originally categories were always visible in the UI.
 
@@ -167,7 +167,40 @@ Tradeoff:
 - Users might not be aware of the flexibility of lists
 - Serves users who want simple checklists
 
-TODO
+## Numeric field input behavior
+
+Originally number fields were bound directly to a non-optional Double with a default value of 0.
+
+Problem:
+- When creating a new item with a numeric field, the value was already 0
+- In SwiftUI TextField treats 0 as a real content rather than a placeholder
+- When user typed 2, the field would become 20
+
+Resolution:
+- Instead of binding to a Double, the field is bound to a String
+- The text input is then parsed to a Double when saved
+
+Tradeoff:
+- Less native numeric field behavior
+- Slightly more parsing logic
+- Clearer UX during item creation and editing
+
+## Template field deletion behavior
+
+Originally users could add multiple custom fields when creating a template.
+
+Problem:
+- Users could add a second custom field without filling out the first.
+- Deleting the second field could trigger an index out of range error because the UI state assumed the previous field was valid.
+
+Resolution:
+- Prevent adding a new field until the previous field is completed.
+- Add validation to ensure template fields have a valid name and type before allowing additional fields.
+- Improve deletion handling so UI state cannot reference invalid indices.
+
+Tradeoff:
+- Slightly less flexible editing flow
+- More robust state management and predictable UI behavior
 
 ---
 
@@ -180,10 +213,9 @@ TODO
 ## What I Would Improve
 
 - Cloud sync for persistence and collaboration
-- Smarter template validation
+- Templates could support constrained value sets (e.g. enum-style fields such as priority: low / medium / high).
+- Lists could support sorting items by template field values (e.g. by date, priority or numeric values).
 - UX onboarding
-
-TODO
 
 ---
 

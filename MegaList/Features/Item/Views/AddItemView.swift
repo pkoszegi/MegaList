@@ -64,8 +64,8 @@ struct AddItemView: View {
                 }
 
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Create") {
-                        viewModel.createItem(in: context)
+                    Button("Add") {
+                        viewModel.addItem(in: context)
                         dismiss()
                     }
                     .disabled(!viewModel.canCreate)

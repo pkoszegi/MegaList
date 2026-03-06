@@ -30,14 +30,14 @@ final class AddItemViewModel {
     }
 
     var canCreate: Bool {
-        Self.canCreate(name: name)
+        Self.validate(name: name)
     }
 
-    static func canCreate(name: String) -> Bool {
+    static func validate(name: String) -> Bool {
         !name.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
-    func createItem(in context: ModelContext) {
+    func addItem(in context: ModelContext) {
         let item = MegaItem(
             name: name,
             isDone: false,
@@ -45,8 +45,12 @@ final class AddItemViewModel {
         )
 
         item.parentList = list
+        if !list.items.contains(where: { $0.id == item.id }) {
+            list.items.append(item)
+        }
         item.fieldValues = fieldController.allValues
         
         context.insert(item)
+        try? context.save()
     }
 }

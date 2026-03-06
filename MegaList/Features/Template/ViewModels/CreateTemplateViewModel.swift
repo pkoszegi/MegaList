@@ -23,7 +23,8 @@ final class CreateTemplateViewModel {
     var fields: [TemplateFieldDraft] = [TemplateFieldDraft()]
 
     var canAddField: Bool {
-        fields.count < maxFieldCount
+        fields.count < maxFieldCount &&
+        fields.allSatisfy(isValidField)
     }
 
     func hasDuplicateTemplateName(in existingTemplateNames: Set<String>) -> Bool {
@@ -55,7 +56,10 @@ final class CreateTemplateViewModel {
     }
 
     func removeField(at offsets: IndexSet) {
-        fields.remove(atOffsets: offsets)
+        let safeOffsets = IndexSet(offsets.filter { $0 < fields.count })
+        guard !safeOffsets.isEmpty else { return }
+
+        fields.remove(atOffsets: safeOffsets)
         if fields.isEmpty {
             fields = [TemplateFieldDraft()]
         }
@@ -74,5 +78,15 @@ final class CreateTemplateViewModel {
 
         context.insert(createdTemplate)
         return createdTemplate
+    }
+
+    private func isValidField(_ field: TemplateFieldDraft) -> Bool {
+        let trimmedName = field.name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedName.isEmpty else { return false }
+
+        switch field.type {
+        case .text, .number, .date, .boolean:
+            return true
+        }
     }
 }

@@ -22,8 +22,10 @@ struct AddCategorySheet: View {
             Form {
                 Section("Name") {
                     TextField("Category name", text: $viewModel.name)
+                        .padding(.trailing, 28)
                         .overlay(alignment: .trailing) {
                             Text(viewModel.emoji)
+                                .padding(.leading, 6)
                         }
                 }
 
@@ -56,7 +58,7 @@ struct AddCategorySheet: View {
             }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Create") {
+                    Button("Add") {
                         onAdd(viewModel.buildCategory())
                     }
                     .disabled(!viewModel.canCreate)

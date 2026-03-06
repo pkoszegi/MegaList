@@ -1,2 +1,0 @@
-Target dependency graph (1 target)
-Target 'MegaList' in project 'MegaList' (no dependencies)

@@ -40,7 +40,7 @@ struct MegaListHomeView: View {
                 }
             }
             .sheet(isPresented: $showingAddSheet) {
-                ExpandableListCreationSheet(
+                ListCreationSheet(
                     isPresented: $showingAddSheet,
                     viewModel: listCreationVM
                 )

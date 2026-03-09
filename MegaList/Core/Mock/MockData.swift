@@ -46,7 +46,7 @@ struct MockData {
             uniqueKeysWithValues: categories.map { ($0.name, $0) }
         )
 
-        let groceries = MegaList(title: "Groceries")
+        let groceries = MegaList(title: "Groceries", template: .groceries)
         context.insert(groceries)
 
         let sampleItems: [(name: String, categoryName: String)] = [

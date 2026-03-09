@@ -12,9 +12,10 @@ import SwiftData
 class ItemFieldValue {
     @Attribute(.unique) var id: UUID
     
-    var fieldID: UUID
+    var fieldId: UUID
     var fieldName: String
     var type: FieldType
+    var sortOrder: Int
     
     var boolValue: Bool?
     var dateValue: Date?
@@ -23,8 +24,45 @@ class ItemFieldValue {
     
     init(field: TemplateField) {
         self.id = UUID()
-        self.fieldID = field.id
+        self.fieldId = field.id
         self.fieldName = field.name
         self.type = field.type
+        self.sortOrder = field.sortOrder
+    }
+    
+    private static let shortDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter
+    }()
+
+    var displayStringIfValuePresent: String? {
+        var value: String? = nil
+
+        switch type {
+        case .boolean:
+            if let boolValue {
+                value = boolValue ? String(localized: "Yes") : String(localized: "No")
+            }
+        case .date:
+            if let date = dateValue {
+                value = Self.shortDateFormatter.string(from: date)
+            }
+        case .text:
+            if let textValue, !textValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                value = textValue
+            }
+        case .number:
+            if let numberValue {
+                value = String(numberValue)
+            }
+        }
+
+        guard let value else { return nil }
+        return fieldName + ": " + value
+    }
+
+    var displayString: String {
+        displayStringIfValuePresent ?? fieldName
     }
 }

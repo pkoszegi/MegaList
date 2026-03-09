@@ -19,7 +19,21 @@ class ListTemplate {
     init(name: String, fields: [TemplateField]) {
         self.id = UUID()
         self.name = name
-        self.fields = fields
+        self.fields = fields.enumerated().map { index, field in
+            field.sortOrder = index
+            return field
+        }
+    }
+}
+
+extension ListTemplate {
+    var orderedFields: [TemplateField] {
+        fields.sorted {
+            if $0.sortOrder != $1.sortOrder {
+                return $0.sortOrder < $1.sortOrder
+            }
+            return $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
+        }
     }
 }
 

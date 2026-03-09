@@ -13,7 +13,7 @@ struct TemplateFieldsSection: View {
 
     var body: some View {
         Section("Details") {
-            ForEach(Array(template.fields), id: \.id) { field in
+            ForEach(template.orderedFields, id: \.id) { field in
                 fieldView(for: field)
             }
         }

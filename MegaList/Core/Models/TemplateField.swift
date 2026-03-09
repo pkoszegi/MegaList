@@ -20,10 +20,12 @@ class TemplateField: Identifiable, Hashable {
     @Attribute(.unique) var id: UUID
     var name: String
     var type: FieldType
+    var sortOrder: Int
     
-    init(name: String, type: FieldType) {
+    init(name: String, type: FieldType, sortOrder: Int = 0) {
         self.id = UUID()
         self.name = name
         self.type = type
+        self.sortOrder = sortOrder
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ExpandableListCreationSheet.swift
+//  ListCreationSheet.swift
 //  MegaList
 //
 //  Created by Petra Koszegi on 17/11/2025.
@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-struct ExpandableListCreationSheet: View {
+struct ListCreationSheet: View {
     @Environment(\.modelContext) private var context
 
     @Binding var isPresented: Bool
@@ -65,14 +65,13 @@ struct ExpandableListCreationSheet: View {
         .onAppear {
             isFocused = true
         }
-        .presentationDetents([.medium, .large])
     }
 }
 
 #Preview {
     let container = MockData.containerWithSampleData()
 
-    ExpandableListCreationSheet(
+    ListCreationSheet(
         isPresented: .constant(true),
         viewModel: ListCreationViewModel()
     )

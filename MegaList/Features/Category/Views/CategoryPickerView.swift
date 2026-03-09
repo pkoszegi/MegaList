@@ -82,17 +82,22 @@ struct CategoryPickerView_Previews: PreviewProvider {
     static var previews: some View {
         let container = MockData.containerWithSampleData()
         let context = container.mainContext
-        let lists = try! context.fetch(FetchDescriptor<MegaList>())
-        let list = lists.first(where: { !$0.items.isEmpty }) ?? lists[0]
-        let firstItem = list.items.first!
-        let categories = try! context.fetch(FetchDescriptor<Category>())
-        let usedCategories = Array(Set(list.items.compactMap { $0.category }))
+        let lists = (try? context.fetch(FetchDescriptor<MegaList>())) ?? []
+        let list = lists.first(where: { !$0.items.isEmpty }) ?? lists.first
+        let categories = (try? context.fetch(FetchDescriptor<Category>())) ?? []
+        let usedCategories = Array(Set((list?.items ?? []).compactMap { $0.category }))
 
-        CategoryPickerView(
-            selectedCategory: .constant(firstItem.category),
-            usedCategories: usedCategories,
-            allCategories: categories
-        )
+        Group {
+            if let firstItem = list?.items.first {
+                CategoryPickerView(
+                    selectedCategory: .constant(firstItem.category),
+                    usedCategories: usedCategories,
+                    allCategories: categories
+                )
+            } else {
+                Text("Preview unavailable")
+            }
+        }
         .modelContainer(container)
     }
 }

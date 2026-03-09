@@ -77,7 +77,7 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "--use-mock-data "
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>

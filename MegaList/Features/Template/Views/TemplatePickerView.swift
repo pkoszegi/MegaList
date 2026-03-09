@@ -56,8 +56,8 @@ struct TemplatePickerView: View {
                             Text(template.name)
                                 .font(.headline)
 
-                            if !template.fields.isEmpty {
-                                Text(template.fields
+                            if !template.orderedFields.isEmpty {
+                                Text(template.orderedFields
                                     .map(\.name)
                                     .joined(separator: " • "))
                                     .font(.caption)
@@ -78,8 +78,8 @@ struct TemplatePickerView: View {
             }
         }
         .navigationTitle("Choose Template")
+        
         .toolbar {
-
             NavigationLink {
                 CreateTemplateView { createdTemplate in
                     selectedTemplate = createdTemplate

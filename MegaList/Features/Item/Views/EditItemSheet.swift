@@ -92,11 +92,16 @@ struct EditItemSheet: View {
 #Preview {
     let container = MockData.containerWithSampleData()
     let context = container.mainContext
-    let categories = try! context.fetch(FetchDescriptor<Category>())
-    let list = try! context.fetch(FetchDescriptor<MegaList>())
-        .first(where: { !$0.items.isEmpty })!
-    let item = list.items[0]
+    let categories = (try? context.fetch(FetchDescriptor<Category>())) ?? []
+    let list = try? context.fetch(FetchDescriptor<MegaList>())
+        .first(where: { !$0.items.isEmpty })
 
-    EditItemSheet(item: item, categories: categories)
-        .modelContainer(container)
+    Group {
+        if let item = list?.items.first {
+            EditItemSheet(item: item, categories: categories)
+        } else {
+            Text("Preview unavailable")
+        }
+    }
+    .modelContainer(container)
 }

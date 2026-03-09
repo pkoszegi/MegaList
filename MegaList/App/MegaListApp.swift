@@ -15,14 +15,18 @@ struct MegaListApp: App {
         if CommandLine.arguments.contains("--use-mock-data") {
             container = MockData.containerWithSampleData()
         } else {
-            container = try! ModelContainer(
-                for: MegaList.self,
-                Category.self,
-                MegaItem.self,
-                ListTemplate.self,
-                TemplateField.self,
-                ItemFieldValue.self
-            )
+            do {
+                container = try ModelContainer(
+                    for: MegaList.self,
+                    Category.self,
+                    MegaItem.self,
+                    ListTemplate.self,
+                    TemplateField.self,
+                    ItemFieldValue.self
+                )
+            } catch {
+                fatalError("Failed to initialize ModelContainer: \(error)")
+            }
         }
     }
     

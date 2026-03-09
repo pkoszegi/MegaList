@@ -1,5 +1,5 @@
 //
-//  ItemFieldValuesController.swift
+//  ItemFieldsState.swift
 //  MegaList
 //
 //  Created by Petra Koszegi on 24/02/2026.
@@ -14,23 +14,45 @@ final class ItemFieldsState {
 
     private(set) var values: [UUID: ItemFieldValue] = [:]
     private var numberDrafts: [UUID: String] = [:]
+    private var fieldOrder: [UUID] = []
 
     init(template: ListTemplate?) {
-        guard let fields = template?.fields else { return }
+        guard let fields = template?.orderedFields else { return }
 
         for field in fields {
             values[field.id] = ItemFieldValue(field: field)
         }
+        fieldOrder = fields.map(\.id)
     }
 
     init(existingValues: [ItemFieldValue]) {
-        for value in existingValues {
-            values[value.fieldID] = value
+        let sortedValues = existingValues.sorted {
+            if $0.sortOrder != $1.sortOrder {
+                return $0.sortOrder < $1.sortOrder
+            }
+            return $0.fieldName.localizedCaseInsensitiveCompare($1.fieldName) == .orderedAscending
         }
+
+        for value in sortedValues {
+            values[value.fieldId] = value
+        }
+        fieldOrder = sortedValues.map(\.fieldId)
     }
 
     var allValues: [ItemFieldValue] {
-        Array(values.values)
+        let orderedValues = fieldOrder.compactMap { values[$0] }
+        let orderedIDs = Set(fieldOrder)
+        let unorderedValues = values
+            .filter { key, _ in !orderedIDs.contains(key) }
+            .map(\.value)
+            .sorted {
+                if $0.sortOrder != $1.sortOrder {
+                    return $0.sortOrder < $1.sortOrder
+                }
+                return $0.fieldName.localizedCaseInsensitiveCompare($1.fieldName) == .orderedAscending
+            }
+
+        return orderedValues + unorderedValues
     }
 
     // MARK: - Bindings

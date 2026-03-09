@@ -89,9 +89,15 @@ struct AddItemView: View {
     let container = MockData.containerWithSampleData()
     let context = container.mainContext
 
-    let list = try! context.fetch(FetchDescriptor<MegaList>())
-        .first(where: { $0.template != nil })!
+    let list = try? context.fetch(FetchDescriptor<MegaList>())
+        .first(where: { $0.template != nil })
 
-    AddItemView(list: list)
-        .modelContainer(container)
+    Group {
+        if let list {
+            AddItemView(list: list)
+        } else {
+            Text("Preview unavailable")
+        }
+    }
+    .modelContainer(container)
 }

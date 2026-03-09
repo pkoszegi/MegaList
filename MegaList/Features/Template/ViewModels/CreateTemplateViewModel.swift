@@ -71,10 +71,11 @@ final class CreateTemplateViewModel {
     func create(in context: ModelContext) -> ListTemplate {
         let createdTemplate = ListTemplate(
             name: templateName.trimmingCharacters(in: .whitespacesAndNewlines),
-            fields: fields.map { draft in
+            fields: fields.enumerated().map { index, draft in
                 TemplateField(
                     name: draft.name.trimmingCharacters(in: .whitespacesAndNewlines),
-                    type: draft.type
+                    type: draft.type,
+                    sortOrder: index
                 )
             }
         )

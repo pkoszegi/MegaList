@@ -104,11 +104,17 @@ struct MegaListDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let container = MockData.containerWithSampleData()
         let context = container.mainContext
-        let list = try! context.fetch(FetchDescriptor<MegaList>())
-            .first(where: { !$0.items.isEmpty })!
+        let list = try? context.fetch(FetchDescriptor<MegaList>())
+            .first(where: { !$0.items.isEmpty })
 
-        MegaListDetailView(list: list)
-            .modelContainer(container)
-            .previewDisplayName("MegaList Detail View")
+        Group {
+            if let list {
+                MegaListDetailView(list: list)
+            } else {
+                Text("Preview unavailable")
+            }
+        }
+        .modelContainer(container)
+        .previewDisplayName("MegaList Detail View")
     }
 }

@@ -10,16 +10,11 @@ Each list can optionally use a template to define custom fields (e.g., quantity,
 ## Demo
 
 <p align="center">
-  <img src="media/example_lists.gif" width="800">
+  <img src="media/example_lists.gif" width="400">
+  <img src="media/add_item.gif" width="400">
 </p>
 
-A few example lists.
-
-<p align="center">
-  <img src="media/add_item.gif" width="800">
-</p>
-
-Creating a list item and marking it complete.
+Left: a few example lists. Right: creating a list item and marking it complete.
 
  
 ## Installation

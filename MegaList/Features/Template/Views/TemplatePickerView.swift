@@ -13,7 +13,8 @@ struct TemplatePickerView: View {
 
     let availableTemplates: ([ListTemplate]) -> [ListTemplate]
     @Binding var selectedTemplate: ListTemplate?
-    var onCreateTemplate: (ListTemplate) -> Void = { _ in }
+    var onSelect: () -> Void = {}
+    var onAddTemplate: () -> Void = {}
 
     private var templates: [ListTemplate] {
         availableTemplates(customTemplates)
@@ -24,6 +25,7 @@ struct TemplatePickerView: View {
 
             Button {
                 selectedTemplate = nil
+                onSelect()
             } label: {
                 HStack {
                     VStack(alignment: .leading) {
@@ -49,6 +51,7 @@ struct TemplatePickerView: View {
             ForEach(templates) { template in
                 Button {
                     selectedTemplate = template
+                    onSelect()
                 } label: {
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
@@ -80,11 +83,8 @@ struct TemplatePickerView: View {
         .navigationTitle("Choose Template")
         
         .toolbar {
-            NavigationLink {
-                CreateTemplateView { createdTemplate in
-                    selectedTemplate = createdTemplate
-                    onCreateTemplate(createdTemplate)
-                }
+            Button {
+                onAddTemplate()
             } label: {
                 Image(systemName: "plus")
             }

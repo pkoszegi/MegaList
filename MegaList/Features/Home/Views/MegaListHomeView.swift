@@ -13,6 +13,7 @@ struct MegaListHomeView: View {
     
     @State private var showingAddSheet = false
     @State private var listCreationVM = ListCreationViewModel()
+    @State private var selectedList: MegaList?
     
     @FocusState private var isTitleFieldFocused: Bool
     
@@ -43,7 +44,17 @@ struct MegaListHomeView: View {
                 ListCreationSheet(
                     isPresented: $showingAddSheet,
                     viewModel: listCreationVM
-                )
+                ) { createdList in
+                    selectedList = createdList
+                }
+            }
+            .onChange(of: showingAddSheet) { _, isPresented in
+                if !isPresented {
+                    listCreationVM.reset()
+                }
+            }
+            .navigationDestination(item: $selectedList) { list in
+                MegaListDetailView(list: list)
             }
             .navigationTitle("MegaList")
         }

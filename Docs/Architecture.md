@@ -16,8 +16,6 @@ Represents a list of items.
 Every list has an isDone field on its items by default so if template is nil, list is a simple checklist. 
 Categories for a list are derived at runtime (`usedCategories`) rather than stored directly on the model.
 
----
-
 ## `MegaItem`
 
 Represents an individual item in a list.
@@ -31,8 +29,6 @@ Represents an individual item in a list.
 `fieldValues: [ItemFieldValue]` - values for template fields (`@Relationship(deleteRule: .cascade)`)  
 `parentList: MegaList?` - optional relationship back to the owning list
 
----
-
 ## `Category`
 
 Represents a category to organize items.
@@ -45,8 +41,6 @@ Represents a category to organize items.
 
 **Note:**  
 `Category` currently has no direct relationship property back to `MegaList` or `MegaItem`.
-
----
 
 ## `ListTemplate` and `TemplateField`
 
@@ -67,8 +61,6 @@ Templates define additional fields for items in a list.
 **Notes:**  
 The app also includes built-in templates (`groceries`, `chores`, `packingList`, `projects`) via `BuiltInTemplates`.
 
----
-
 ## `ItemFieldValue`
 
 Stores a value for a template field in an item.  
@@ -87,8 +79,6 @@ Stores a value for a template field in an item.
 **Note:**  
 `ItemFieldValue` stores `fieldID`/`fieldName` snapshots and does not keep a direct SwiftData relationship to `TemplateField`.
 
----
-
 ## Mock Data
 
 - `Category` provides reusable static mock categories (`fruits`, `dairy`, `cleaning`, `bakery`, `drinks`, etc.)
@@ -99,8 +89,6 @@ Stores a value for a template field in an item.
 - Sample lists: `Groceries`, `Chores`, `Party Supplies`, `Packing List`
 - `Chores` uses `.chores` template and `Packing List` uses `.packingList`
 
----
-
 ## Relationships
 
 - `MegaList` → `MegaItem` (1:N, cascade delete)
@@ -109,8 +97,6 @@ Stores a value for a template field in an item.
 - `MegaList` → `ListTemplate` (optional)
 - `ListTemplate` → `TemplateField` (1:N, cascade delete)
 - `MegaItem` → `ItemFieldValue` (1:N, cascade delete)
-
----
 
 ## Design Decisions
 

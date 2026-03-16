@@ -12,8 +12,6 @@ MegaList is a lightweight and flexible list creation app, designed for individua
 
 **Problem to solve:** Most existing list apps are either too simple, just a single checklist or too complex with features that result in user experience friction. How can we help users quickly create and manage flexible lists without overwhelming them with unnecessary features?
 
----
-
 ## Target user
 
 - Individuals managing personal recurring lists
@@ -21,15 +19,11 @@ MegaList is a lightweight and flexible list creation app, designed for individua
 - Comfortable with smartphones, but not necessarily power users
 - Value speed, simplicity and reliability
 
----
-
 ## Use Cases
 
 - Weekly grocery shopping list
 - Travel packing list
 - To-do list for project with tasks and deadlines
-
----
 
 ## Goals
 
@@ -37,15 +31,11 @@ MegaList is a lightweight and flexible list creation app, designed for individua
 - Support multiple lists without friction
 - Keep the UI minimal and focused
 
----
-
 ## Success Criteria
 
 - Clear MVP scope with justified trade-offs
 - Working core flows implemented or clearly specified
 - Demonstrates product decision making rather than feature volume
-
----
 
 ## Non-Goals
 
@@ -54,8 +44,6 @@ MegaList is a lightweight and flexible list creation app, designed for individua
 - Collaboration or list sharing
 - Reminders, notifications or due dates
 - Analytics or productivity metrics
-
----
 
 ## Minimum Viable Product
 
@@ -79,8 +67,6 @@ MegaList is a lightweight and flexible list creation app, designed for individua
     - Selected from categories not used in current list
     - Created
 - Persist data locally on device
-
----
 
 ## Nice-to-have features
 

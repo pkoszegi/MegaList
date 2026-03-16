@@ -8,8 +8,6 @@
 - Identify trade-offs between simplicity and flexibility
 - Validate whether categories and light structure are a meaningful differentiator
 
----
-
 ## App evaluations
 
 1. Listonic
@@ -68,8 +66,6 @@ Limitations
     
 **Key takeaway:** Maximum flexibility comes at a cost of speed and simplicity
 
----
-
 ## Competitive analysis
 
 | App           | Speed of entry    | Structure | Flexibility   | Cognitive load    | Primary use case  |
@@ -78,8 +74,6 @@ Limitations
 | Listonic      | High              | Medium    | Low-Medium    | Medium            | Grocery lists     |
 | Notion        | Low               | Very high | Very high     | High              | Complex workflows |
 | Megalist      | High              | Medium    | Medium        | Low               | Everyday lists    |
-
----
 
 ## Dimension-by-dimension comparison
 
@@ -132,8 +126,6 @@ MegaList
 
 **Takeaway:** MegaList optimises for recurring everyday use.
 
----
-
 ## Differentiation summary
 
 Megalist differentiates itself through:
@@ -141,8 +133,6 @@ Megalist differentiates itself through:
 - Categories as a first-class organisational primitive
 - Deferred complexity rather than upfront configuration
 - Maintaining low cognitive overhead
-
----
 
 ## Strategic trade-offs
 
@@ -153,8 +143,6 @@ MegaList intentionally does not compete on:
 
 These are deferred to protect speed and simplicity in the MVP.
 
----
-
 ## Key insights
 
 - Categories and grouping significantly improve scannability across list types
@@ -162,12 +150,8 @@ These are deferred to protect speed and simplicity in the MVP.
 - Users benefit from structure that emerges gradually, not upfront
 - A single tool can support multiple list types
 
----
-
 ## Implications for MVP
 
 - Categories included in MVP, but limited in scope
 - Built-in list types provide structure without configuration
 - Advanced features deferred to future iterations
-
-

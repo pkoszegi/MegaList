@@ -13,11 +13,13 @@ struct ListCreationSheet: View {
 
     @Binding var isPresented: Bool
     @Bindable var viewModel: ListCreationViewModel
+    var onCreate: (MegaList) -> Void = { _ in }
 
     @FocusState private var isFocused: Bool
+    @State private var navigationPath: [ListCreationRoute] = []
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             Form {
                 Section("Name") {
                     TextField("List title", text: $viewModel.title)
@@ -25,16 +27,7 @@ struct ListCreationSheet: View {
                 }
 
                 Section {
-                    NavigationLink {
-                        TemplatePickerView(
-                            availableTemplates: { customTemplates in
-                                viewModel.availableTemplates(customTemplates: customTemplates)
-                            },
-                            selectedTemplate: $viewModel.selectedTemplate
-                        ) { createdTemplate in
-                            viewModel.didCreateTemplate(createdTemplate)
-                        }
-                    } label: {
+                    NavigationLink(value: ListCreationRoute.templatePicker) {
                         HStack {
                             Text("Template")
                             Spacer()
@@ -44,19 +37,43 @@ struct ListCreationSheet: View {
                     }
                 }
             }
+            .navigationDestination(for: ListCreationRoute.self) { route in
+                switch route {
+                case .templatePicker:
+                    TemplatePickerView(
+                        availableTemplates: { customTemplates in
+                            viewModel.availableTemplates(customTemplates: customTemplates)
+                        },
+                        selectedTemplate: $viewModel.selectedTemplate,
+                        onSelect: {
+                            navigationPath.removeAll()
+                        },
+                        onAddTemplate: {
+                            navigationPath.append(.createTemplate)
+                        }
+                    )
+                case .createTemplate:
+                    CreateTemplateView(dismissOnCreate: false) { createdTemplate in
+                        viewModel.didCreateTemplate(createdTemplate)
+                        navigationPath.removeAll()
+                    }
+                }
+            }
             .navigationTitle("Create List")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
+                        viewModel.reset()
                         isPresented = false
                     }
                 }
 
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Create") {
-                        viewModel.create(in: context)
+                        let list = viewModel.create(in: context)
                         isPresented = false
+                        onCreate(list)
                     }
                     .disabled(!viewModel.canCreate)
                 }
@@ -66,6 +83,11 @@ struct ListCreationSheet: View {
             isFocused = true
         }
     }
+}
+
+private enum ListCreationRoute: Hashable {
+    case templatePicker
+    case createTemplate
 }
 
 #Preview {

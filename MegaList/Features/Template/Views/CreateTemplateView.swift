@@ -15,6 +15,7 @@ struct CreateTemplateView: View {
 
     @State private var viewModel = CreateTemplateViewModel()
 
+    var dismissOnCreate: Bool = true
     var onCreate: (ListTemplate) -> Void
 
     private var fieldTypeOptions: [FieldType] {
@@ -24,60 +25,60 @@ struct CreateTemplateView: View {
     var body: some View {
         @Bindable var viewModel = viewModel
 
-        NavigationStack {
-            Form {
-                Section("Template") {
-                    TextField("Template name", text: $viewModel.templateName)
-                    if viewModel.hasDuplicateTemplateName {
-                        Text("Template name already exists.")
-                            .font(.caption)
-                            .foregroundStyle(.red)
-                    }
-                }
-
-                Section("Fields") {
-                    ForEach($viewModel.fields) { $field in
-                        HStack(spacing: 12) {
-                            TextField("Field name", text: $field.name)
-
-                            Picker(
-                                "Type",
-                                selection: $field.type
-                            ) {
-                                ForEach(fieldTypeOptions, id: \.self) { type in
-                                    Text(type.displayName).tag(type)
-                                }
-                            }
-                            .labelsHidden()
-                            .pickerStyle(.menu)
-                        }
-                    }
-                    .onDelete(perform: viewModel.removeField)
-
-                    Button {
-                        viewModel.addField()
-                    } label: {
-                        Label("Add Field", systemImage: "plus")
-                    }
-                    .disabled(!viewModel.canAddField)
+        Form {
+            Section("Template") {
+                TextField("Template name", text: $viewModel.templateName)
+                if viewModel.hasDuplicateTemplateName {
+                    Text("Template name already exists.")
+                        .font(.caption)
+                        .foregroundStyle(.red)
                 }
             }
-            .navigationTitle("New Template")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden()
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
-                }
 
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Create") {
-                        let createdTemplate = viewModel.create(in: context)
-                        onCreate(createdTemplate)
+            Section("Fields") {
+                ForEach($viewModel.fields) { $field in
+                    HStack(spacing: 12) {
+                        TextField("Field name", text: $field.name)
+
+                        Picker(
+                            "Type",
+                            selection: $field.type
+                        ) {
+                            ForEach(fieldTypeOptions, id: \.self) { type in
+                                Text(type.displayName).tag(type)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.menu)
+                    }
+                }
+                .onDelete(perform: viewModel.removeField)
+
+                Button {
+                    viewModel.addField()
+                } label: {
+                    Label("Add Field", systemImage: "plus")
+                }
+                .disabled(!viewModel.canAddField)
+            }
+        }
+        .navigationTitle("New Template")
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel") { dismiss() }
+            }
+
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Create") {
+                    let createdTemplate = viewModel.create(in: context)
+                    onCreate(createdTemplate)
+                    if dismissOnCreate {
                         dismiss()
                     }
-                    .disabled(!viewModel.canCreate)
                 }
+                .disabled(!viewModel.canCreate)
             }
         }
         .onAppear {

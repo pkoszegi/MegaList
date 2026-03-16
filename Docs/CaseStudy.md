@@ -22,8 +22,6 @@ I wanted to explore whether it was possible to build a single flexible list syst
 The challenge:
 How do you design a data layer that supports multiple list types without hardcoding each use case into it or turning the app a schema nightmare?
 
----
-
 ## Goals
 
 - Support simple checklists by default
@@ -37,11 +35,9 @@ Non-Goals
 - Collaboration
 - Enterprise task management
 
----
-
 ## Product Principles
 
-Several guiding principled shaped the design of MegaList.
+Several guiding principles shaped the design of MegaList.
 
 **Speed over configuration**
 Users should be able to create and start using a list immediately. Time-to-first-item is prioritized over advanced configuration.
@@ -54,8 +50,6 @@ Customization is intentionally limited to prevent cognitive overload and keep th
 
 **Lists are independent contexts**
 Each list acts as its own environment. Categories, fields, and behaviors remain scoped to the list that uses them.
-
----
 
 ## Key Architectural Decisions
 
@@ -96,14 +90,14 @@ If a list has no template, it becomes a simple checklist automatically. This pre
 - Duplicate checklist models
 - UI branching for basic lists
 
-It keeps the mental model simple, every list item can always be checked off
+It keeps the mental model simple, every list item can always be checked off.
 
 **3. Categories are Derived, Not Related**
 
-Instead of creating a direct many-to-many relationship between `MegaList` and `Category` I derive categories at runtime from items.
+Instead of creating a direct many-to-many relationship between `MegaList` and `Category`, categories are derived at runtime from items.
 
 **Why?**
-- Avoid redundant relationship maintanance
+- Avoid redundant relationship maintenance
 - Prevent data inconsistency
 - Reduce SwiftData relationship complexity
 - Keep categories optional
@@ -137,16 +131,12 @@ Tradeoff:
 - Slightly more boilerplate and additional layer to maintain
 - Keeps architecture scaleable as features grow
 
----
-
 ## What This Project Demonstrates
 
 - Designing flexible data models without schema fragmentation
 - Practical SwiftData relationship design and tradeoffs
 - Template-driven UI generation in SwiftUI
 - Balancing product flexibility with cognitive load
-
----
 
 ## UX Issues I Encountered
 
@@ -220,8 +210,6 @@ Tradeoff:
 - Slightly less flexible editing flow
 - More robust state management and predictable UI behavior
 
----
-
 ## Testing
 
 **Test Coverage**
@@ -232,12 +220,25 @@ Tradeoff:
 - Category validation and duplicate detection logic
 
 **Test Strategy**
-- Most current tests are pure Viewmodel/Model logic tests and avoid persistence setup
+- Most tests focus on ViewModel and model logic and avoid persistence setup
 - Where persistance behavior is involved, tests use an in-memory mock container
 - SwiftUI view rendering details were not directly unit tested
 - Views are declarative in this project, so correctness is validated by testing the state and logic that drive them, plus manual UI verification for interaction polish
 
----
+## Development Process
+
+AI-assisted tools were used as a supplementary resource during development.
+
+ChatGPT was primarily used for 
+- architectural brainstorming 
+- exploring alternative approaches to the template and data model design
+
+Codex was used 
+- during implementation of the dynamic template field system (particularly bindings for item field values)
+- for generating initial unit test scaffolding
+- minor bug fixes and code cleanup
+
+All final architectural decisions, debugging, and integration were performed and verified manually.
 
 ## What I Would Improve
 
@@ -247,11 +248,9 @@ Tradeoff:
 - UX onboarding
 - Future versions could include a dedicated template management interface allowing users to inspect, edit, and create templates.
 
----
-
 ## Key Takeaways
 
-Building MegaList clarified a few core product and engineering principles.
+Building MegaList highlighted several product and engineering lessons.
 
 **Flexibility requires boundaries**
 Early versions allowed highly customizable templates with unlimited fields. While technically flexible, this increased cognitive load and slowed down item creation. Limiting templates to a small number of fields created a faster and clearer user experience.

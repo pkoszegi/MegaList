@@ -48,19 +48,24 @@ final class ListCreationViewModel{
         !title.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
-    func create(in context: ModelContext) {
+    func create(in context: ModelContext) -> MegaList {
         let list = MegaList(
             title: title,
             template: selectedTemplate
         )
         context.insert(list)
-        title = ""
-        selectedTemplate = nil
-        showingCreateTemplate = false
+        reset()
+        return list
     }
 
     func didCreateTemplate(_ template: ListTemplate) {
         selectedTemplate = template
+        showingCreateTemplate = false
+    }
+
+    func reset() {
+        title = ""
+        selectedTemplate = nil
         showingCreateTemplate = false
     }
 }

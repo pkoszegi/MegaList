@@ -12,6 +12,7 @@ MegaList is a lightweight and flexible list creation app, designed for individua
 Most list apps fall into two extremes:
 - Too simple -> only checklists
 - Too complex -> heavy task managers with rigid structures
+
 I wanted to explore whether it was possible to build a single flexible list system that could handle:
 - Groceries
 - Chores

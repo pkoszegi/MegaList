@@ -32,9 +32,8 @@ How do you design a data layer that supports multiple list types without hardcod
 - Keep SwiftData relationships clean and maintainable
 
 Non-Goals
-- Cloud sync
-- Collaboration
-- Enterprise task management
+- Cloud sync and collaboration are deferred for future iterations
+- Enterprise task management is out of scope
 
 ## Product Principles
 
